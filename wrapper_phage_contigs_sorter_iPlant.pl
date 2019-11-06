@@ -169,10 +169,13 @@ if ($choice_database == 2) {
         'Phage_gene_catalog_plus_viromes', 'Phage_Clusters_current.tab');
 }
 elsif ($choice_database == 3) {
-    $dir_Phage_genes    = catdir($data_dir, 'euk-virus');
+    # $dir_Phage_genes    = catdir($data_dir, 'euk-virus');
     # ??? what goes here?  I don't have this file
+    #$ref_phage_clusters = catfile($data_dir, 'euk-virus', 'Phage_Clusters_current.tab');
+    
+    $dir_Phage_genes    = catdir($data_dir, 'Phage_gene_catalog_plus_viromes_GVD');
     $ref_phage_clusters = catfile($data_dir,
-        'euk-virus', 'Phage_Clusters_current.tab');
+        'Phage_gene_catalog_plus_viromes_GVD', 'Phage_Clusters_current.tab');
 }
 
 my $db_PFAM_a = catfile($data_dir, 'PFAM_27', 'Pfam-A.hmm');
@@ -631,7 +634,12 @@ if ($choice_database == 2) {
     );
 }
 elsif ($choice_database == 3) {
-    print $s1 "Eukaryotic";
+    say $s1 join(' ', 
+        "Viromes + GVD : all bacterial and archaeal virus genomes in Refseq,",
+        "as of January 2014, plus non-redundant predicted genes from viral",
+        "metagenomes (including seawater, freshwater, and human-related",
+        "samples), plus Gut Virome Database v1.7.2018"
+    );
 }
 else {
     say $s1 "RefseqABVir (all bacterial and archaeal virus genomes " .
