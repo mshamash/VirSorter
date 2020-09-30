@@ -96,8 +96,8 @@ unless ($input_file) {
     pod2usage('MISSING PARAMETER: Specify the input FASTA file with --fna FILENAME');
 }
 
-if ($choice_database < 1 || $choice_database > 3) {
-    pod2usage('WRONG PARAMETER: choice_database must be 1, 2, or 3');
+if ($choice_database < 1 || $choice_database > 4) {
+    pod2usage('WRONG PARAMETER: choice_database must be 1, 2, 3, or 4');
 }
 
 if ($diamond == 1) {
@@ -176,6 +176,15 @@ elsif ($choice_database == 3) {
     $dir_Phage_genes    = catdir($data_dir, 'Phage_gene_catalog_plus_viromes_GVD');
     $ref_phage_clusters = catfile($data_dir,
         'Phage_gene_catalog_plus_viromes_GVD', 'Phage_Clusters_current.tab');
+}
+elsif ($choice_database == 4) {
+    # $dir_Phage_genes    = catdir($data_dir, 'euk-virus');
+    # ??? what goes here?  I don't have this file
+    #$ref_phage_clusters = catfile($data_dir, 'euk-virus', 'Phage_Clusters_current.tab');
+    
+    $dir_Phage_genes    = catdir($data_dir, 'Phage_gene_catalog_plus_viromes_GVD-v1');
+    $ref_phage_clusters = catfile($data_dir,
+        'Phage_gene_catalog_plus_viromes_GVD-v1', 'Phage_Clusters_current.tab');
 }
 
 my $db_PFAM_a = catfile($data_dir, 'PFAM_27', 'Pfam-A.hmm');
@@ -638,7 +647,15 @@ elsif ($choice_database == 3) {
         "Viromes + GVD : all bacterial and archaeal virus genomes in Refseq,",
         "as of January 2014, plus non-redundant predicted genes from viral",
         "metagenomes (including seawater, freshwater, and human-related",
-        "samples), plus Gut Virome Database v1.7.2018"
+        "samples), plus Gut Virome Database v1.7.2018 (preprint)"
+    );
+}
+elsif ($choice_database == 4) {
+    say $s1 join(' ', 
+        "Viromes + GVD : all bacterial and archaeal virus genomes in Refseq,",
+        "as of January 2014, plus non-redundant predicted genes from viral",
+        "metagenomes (including seawater, freshwater, and human-related",
+        "samples), plus Gut Virome Database v1 (first published version)"
     );
 }
 else {
